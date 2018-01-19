@@ -19,7 +19,7 @@ var server = http.createServer(function(request, response) {
 		});
 	}
 	else if (resource == '/resume') {
-		fs.readFile('resume/html/index.html', 'utf-8', function(error, data) {
+		fs.readFile('resume/index.html', 'utf-8', function(error, data) {
 			if (error) {
 				response.writeHead(500, {'Content-Type': 'text/html'});
 				response.end('500 Internal Server Error : ' + error);

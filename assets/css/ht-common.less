@@ -1,0 +1,145 @@
+@import "./variables.less";
+@import "./mixins.less";
+
+@font-face {
+  font-family: 'Nanum Gothic';
+  font-style: normal;
+  font-weight: bold;
+  src: url("@{path-font}/NanumGothic-Bold.eot");
+  src: url("@{path-font}/NanumGothic-Bold.eot?#iefix") format('embedded-opentype'),
+  url("@{path-font}/NanumGothic-Bold.woff2") format('woff2'),
+  url("@{path-font}/NanumGothic-Bold.woff") format('woff'),
+  url("@{path-font}/NanumGothic-Bold.ttf") format('truetype');
+}
+@font-face {
+  font-family: 'Nanum Gothic';
+  font-style: normal;
+  font-weight: normal;
+  src: url("@{path-font}/NanumGothic-Regular.eot");
+  src: url("@{path-font}/NanumGothic-Regular.eot?#iefix") format('embedded-opentype'),
+  url("@{path-font}/NanumGothic-Regular.woff2") format('woff2'),
+  url("@{path-font}/NanumGothic-Regular.woff") format('woff'),
+  url("@{path-font}/NanumGothic-Regular.ttf") format('truetype');
+}
+@font-face {
+  font-family: 'Nanum Barun Gothic';
+  font-style: normal;
+  font-weight: normal;
+  src: url("@{path-font}/NanumBarunGothic.eot");
+  src: url("@{path-font}/NanumBarunGothic.eot?#iefix") format('embedded-opentype'),
+  url("@{path-font}/NanumBarunGothic.woff") format('woff'),
+  url("@{path-font}/NanumBarunGothic.ttf") format('truetype');
+}
+@font-face {
+  font-family: 'Nanum Barun Gothic';
+  font-style: normal;
+  font-weight: bold;
+  src: url("@{path-font}/NanumBarunGothicBold.eot");
+  src: url("@{path-font}/NanumBarunGothicBold.eot?#iefix") format('embedded-opentype'),
+  url("@{path-font}/NanumBarunGothicBold.ttf") format('truetype');
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	RESET
+/*-----------------------------------------------------------------------------------*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  font-weight: normal;
+  vertical-align: baseline;
+  background: transparent
+}
+body {
+  line-height: 1
+}
+ol, ul {
+  list-style: none
+}
+blockquote, q {
+  quotes: none
+}
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none
+}
+:focus {
+  outline: 0
+}
+ins {
+  text-decoration: none
+}
+del {
+  text-decoration: line-through
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0
+}
+.clear {
+  clear: both;
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0
+}
+th, td {
+  margin: 0;
+  padding: 0
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0
+}
+.clear {
+  clear: both;
+}
+br {
+  line-height: 10px;
+}
+input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
+  border: 0px;
+}
+input[type="submit"]:focus, input[type="button"]:focus {
+  outline: none;
+}
+::selection {
+  background: #fefac7; /* Safari */
+  color: #555555;
+}
+::-moz-selection {
+  background: #fefac7; /* Firefox */
+  color: #555555;
+}
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.clearfix {
+  *zoom: 1;
+}
+input, textarea {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+input[type="checkbox"] {
+  -webkit-appearance: checkbox;
+  width: 10px;
+}
+input[type="radio"] {
+  -webkit-appearance: radio;
+  box-sizing: border-box;
+  width: 10px;
+}
