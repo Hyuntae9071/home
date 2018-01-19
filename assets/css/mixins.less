@@ -1,0 +1,355 @@
+// 말줄임
+.ellipsis(@line, @line-height) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: @line;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  line-height: @line-height;
+  max-height: @line-height * @line;
+}
+.ellipsis-cancel(@display, @line-height) {
+  overflow: auto;
+  text-overflow: clip;
+  display: @display;
+  -webkit-line-clamp: none;
+  -webkit-box-orient: horizontal;
+  word-wrap: break-word;
+  line-height: @line-height;
+  max-height: none;
+}
+.ellipsis() {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fill() {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+// Sizing shortcuts
+.size(@width; @height) {
+  width: @width;
+  height: @height;
+}
+.square(@size) {
+  .size(@size; @size);
+}
+// 라운드 테두리
+.circle() {
+  .border-radius(all, 50%)
+}
+.border-radius(all, @radius) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}
+.border-radius(top, @radius) {
+  -webkit-border-top-left-radius: @radius;
+  -webkit-border-top-right-radius: @radius;
+  -moz-border-radius-topleft: @radius;
+  -moz-border-radius-topright: @radius;
+  border-top-left-radius: @radius;
+  border-top-right-radius: @radius;
+}
+.border-radius(right, @radius) {
+  -webkit-border-bottom-right-radius: @radius;
+  -webkit-border-top-right-radius: @radius;
+  -moz-border-radius-bottomright: @radius;
+  -moz-border-radius-topright: @radius;
+  border-bottom-right-radius: @radius;
+  border-top-right-radius: @radius;
+}
+.border-radius(bottom, @radius) {
+  -webkit-border-bottom-left-radius: @radius;
+  -webkit-border-bottom-right-radius: @radius;
+  -moz-border-radius-bottomleft: @radius;
+  -moz-border-radius-bottomright: @radius;
+  border-bottom-right-radius: @radius;
+  border-bottom-left-radius: @radius;
+}
+.border-radius(left, @radius) {
+  -webkit-border-top-left-radius: @radius;
+  -webkit-border-bottom-left-radius: @radius;
+  -moz-border-radius-topleft: @radius;
+  -moz-border-radius-bottomleft: @radius;
+  border-bottom-left-radius: @radius;
+  border-top-left-radius: @radius;
+}
+// 박스 그림자
+.box-shadow(@shadow: 0 1px 3px rgba(0,0,0,.25)) {
+  -webkit-box-shadow: @shadow;
+  -moz-box-shadow: @shadow;
+  box-shadow: @shadow;
+}
+.box-shadow2(@shadow1, @shadow2) {
+  -webkit-box-shadow: @shadow1, @shadow2;
+  -moz-box-shadow: @shadow1, @shadow2;
+  box-shadow: @shadow1, @shadow2;
+}
+// 투명도(전체)
+.opacity(@opacity) {
+  opacity: @opacity;
+  // IE8 filter
+  @opacity-ie: (@opacity * 100);
+  filter: ~"alpha(opacity=@{opacity-ie})";
+}
+.blur(@size) {
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    filter: blur(@size);
+    -webkit-filter: blur(@size);
+    -moz-filter: blur(@size);
+    -o-filter: blur(@size);
+    -ms-filter: blur(@size);
+    filter: url(~"#blur");
+  }
+}
+// 박스 좌우정렬
+.center-block(@width) {
+  width: @width;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+// Clear
+.clear() {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+// 레티나 이미지 처리
+.retina(@file, @ext, @size) {
+  background-image: url("@{file}.@{ext}");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: @size;
+
+  @media (-webkit-min-device-pixel-ratio: 2),
+  (   min--moz-device-pixel-ratio: 2),
+  (     -o-min-device-pixel-ratio: 2/1),
+  (        min-device-pixel-ratio: 2),
+  (                min-resolution: 192dpi),
+  (                min-resolution: 2dppx) {
+    background-image: url("@{file}@2x.@{ext}");
+  }
+}
+// 기본 아이콘
+.icon(@file, @ext, @width, @height) {
+  display: inline-block;
+  width: @width;
+  height: @height;
+  background-size: @width;
+  .retina(@file, @ext, @width @height);
+}
+// 리스트 불릿
+.bullet(@color, @size, @margin) {
+  padding-left: @size + @margin;
+  text-indent: -(@size + @margin);
+
+  &:before {
+    content: "";
+    display: inline-block;
+    margin-right: @margin;
+    width: @size;
+    height: @size;
+    margin-top: -(@size / 2);
+    vertical-align: middle;
+    background-color: @color;
+    background-position: center;
+    .circle();
+  }
+}
+.img-bullet(@size, @margin, @file, @ext) {
+  line-height: @size;
+  .bullet(transparent, @size, @margin);
+
+  &:before {
+    vertical-align: bottom;
+    .retina(@file, @ext, @size);
+    .border-radius(all, 0);
+  }
+}
+// 이동
+.transition(@transition) {
+  -webkit-transition: @transition;
+  -o-transition: @transition;
+  transition: @transition;
+}
+.transition2(@transition1, @transition2) {
+  -webkit-transition: @transition1, @transition2;
+  -o-transition: @transition1, @transition2;
+  transition: @transition1, @transition2;
+}
+.transition-property(@transition-property) {
+  -webkit-transition-property: @transition-property;
+  transition-property: @transition-property;
+}
+.transition-delay(@transition-delay) {
+  -webkit-transition-delay: @transition-delay;
+  transition-delay: @transition-delay;
+}
+.transition-duration(@transition-duration) {
+  -webkit-transition-duration: @transition-duration;
+  transition-duration: @transition-duration;
+}
+.transition-delay(@time) {
+  -webkit-transition-delay: @time;
+  -moz-transition-delay: @time;
+  -ms-transition-delay: @time;
+  -o-transition-delay: @time;
+  transition-delay: @time;
+}
+.transition-timing-function(@timing-function) {
+  -webkit-transition-timing-function: @timing-function;
+  -moz-transition-timing-function: @timing-function;
+  -o-transition-timing-function: @timing-function;
+  transition-timing-function: @timing-function;
+}
+.transition-transform(@transition) {
+  -webkit-transition: -webkit-transform @transition;
+  -moz-transition: -moz-transform @transition;
+  -o-transition: -o-transform @transition;
+  transition: transform @transition;
+}
+.transform(@option) {
+  -webkit-transform: @option;
+  -moz-transform: @option;
+  -ms-transform: @option;
+  -o-transform: @option;
+  transform: @option;
+}
+// 회전
+.rotate(@degrees) {
+  -webkit-transform: rotate(@degrees);
+  -moz-transform: rotate(@degrees);
+  -ms-transform: rotate(@degrees);
+  -o-transform: rotate(@degrees);
+  transform: rotate(@degrees);
+}
+// 사이즈 변경
+.scale(@ratio; @ratio-y...) {
+  -webkit-transform: scale(@ratio, @ratio-y);
+  -moz-transform: scale(@ratio, @ratio-y);
+  -ms-transform: scale(@ratio, @ratio-y);
+  -o-transform: scale(@ratio, @ratio-y);
+  transform: scale(@ratio, @ratio-y);
+}
+// 이동
+.translate(@x; @y) {
+  -webkit-transform: translate(@x, @y);
+  -moz-transform: translate(@x, @y);
+  -ms-transform: translate(@x, @y);
+  -o-transform: translate(@x, @y);
+  transform: translate(@x, @y);
+}
+// 기울기
+.skew(@x; @y) {
+  -webkit-transform: skew(@x, @y);
+  -moz-transform: skew(@x, @y, @z);
+  -ms-transform: skewX(@x) skewY(@y);
+  -o-transform: skew(@x, @y, @z);
+  transform: skew(@x, @y);
+}
+// 3D 이동
+.translate3d(@x; @y; @z) {
+  -webkit-transform: translate3d(@x, @y, @z);
+  -moz-transform: translate3d(@x, @y, @z);
+  -ms-transform: translate3d(@x, @y, @z);
+  -o-transform: translate3d(@x, @y, @z);
+  transform: translate3d(@x, @y, @z);
+}
+// 상하 회전
+.rotateX(@degrees) {
+  -webkit-transform: rotateX(@degrees);
+  -moz-transform: rotateX(@degrees);
+  -ms-transform: rotateX(@degrees);
+  -o-transform: rotateX(@degrees);
+  transform: rotateX(@degrees);
+}
+// 좌우 회전
+.rotateY(@degrees) {
+  -webkit-transform: rotateY(@degrees);
+  -moz-transform: rotateY(@degrees);
+  -ms-transform: rotateY(@degrees);
+  -o-transform: rotateY(@degrees);
+  transform: rotateY(@degrees);
+}
+// 대각선 회전
+.rotateZ(@degrees) {
+  -webkit-transform: rotateZ(@degrees);
+  -moz-transform: rotateZ(@degrees);
+  -ms-transform: rotateZ(@degrees);
+  -o-transform: rotateZ(@degrees);
+  transform: rotateZ(@degrees);
+}
+.perspective(@perspective) {
+  -webkit-perspective: @perspective;
+  -moz-perspective: @perspective;
+  perspective: @perspective;
+}
+.perspective-origin(@perspective) {
+  -webkit-perspective-origin: @perspective;
+  -moz-perspective-origin: @perspective;
+  perspective-origin: @perspective;
+}
+.transform-origin(@origin) {
+  -webkit-transform-origin: @origin;
+  -moz-transform-origin: @origin;
+  -ms-transform-origin: @origin;
+  transform-origin: @origin;
+}
+// Animations
+.animation(@animation) {
+  -webkit-animation: @animation;
+  -o-animation: @animation;
+  animation: @animation;
+}
+.animation-name(@name) {
+  -webkit-animation-name: @name;
+  -o-animation-name: @animation;
+  animation-name: @name;
+}
+.animation-duration(@duration) {
+  -webkit-animation-duration: @duration;
+  -o-animation-duration: @animation;
+  animation-duration: @duration;
+}
+.animation-timing-function(@timing-function) {
+  -webkit-animation-timing-function: @timing-function;
+  -o-animation-timing-function: @animation;
+  animation-timing-function: @timing-function;
+}
+.animation-delay(@delay) {
+  -webkit-animation-delay: @delay;
+  -o-animation-delay: @animation;
+  animation-delay: @delay;
+}
+.animation-iteration-count(@iteration-count) {
+  -webkit-animation-iteration-count: @iteration-count;
+  -o-animation-iteration-count: @animation;
+  animation-iteration-count: @iteration-count;
+}
+.animation-direction(@direction) {
+  -webkit-animation-direction: @direction;
+  -o-animation-direction: @animation;
+  animation-direction: @direction;
+}
